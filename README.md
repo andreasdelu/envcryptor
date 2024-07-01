@@ -1,6 +1,3 @@
-Sure! Here is a sample `README.md` file based on your project:
-
-````markdown
 # EnvCryptor
 
 EnvCryptor is a tool to encrypt and decrypt environment variables. It allows you to securely manage environment variables in your projects by encrypting and decrypting `.env` files.
@@ -15,14 +12,11 @@ EnvCryptor is a tool to encrypt and decrypt environment variables. It allows you
 
 ## Installation
 
-First, clone the repository and install the dependencies:
+Simply install the package using `npm`:
 
 ```bash
-git clone https://github.com/your-username/envcryptor.git
-cd envcryptor
-npm install
+npm install envcryptor
 ```
-````
 
 ## Usage
 
@@ -30,8 +24,16 @@ npm install
 
 Encrypt an environment variable file:
 
+Using a key as a string:
+
 ```bash
-npx envcryptor encrypt <input> <output> -s <encryption_key>
+envcryptor encrypt <input> <output> -s <encryption_key>
+```
+
+Using a key as a `.key` file:
+
+```bash
+envcryptor encrypt <input> <output> -f <file>
 ```
 
 Options:
@@ -43,10 +45,18 @@ Options:
 
 ### Decrypt
 
-Decrypt an environment variable file:
+Decrypt an encrypted environment variable file:
+
+Using a key as a string:
 
 ```bash
-npx envcryptor decrypt <input> <output> -s <encryption_key>
+envcryptor decrypt <input> <output> -s <encryption_key>
+```
+
+Using a key as a `.key` file:
+
+```bash
+envcryptor decrypt <input> <output> -f <file>
 ```
 
 Options:
@@ -60,8 +70,16 @@ Options:
 
 Edit an encrypted environment variable file:
 
+Using a key as a string:
+
 ```bash
-npx envcryptor edit <file> -s <encryption_key>
+envcryptor edit <file> -s <encryption_key>
+```
+
+Using a key as a `.key` file:
+
+```bash
+envcryptor edit <file> -f <file>
 ```
 
 Options:
@@ -74,8 +92,16 @@ Options:
 
 Generate a new encryption key:
 
+And save it to a `.key` file:
+
 ```bash
-npx envcryptor keygen -o <output>
+envcryptor keygen -o <output>
+```
+
+Or output it to the console:
+
+```bash
+envcryptor keygen
 ```
 
 Options:
@@ -86,8 +112,16 @@ Options:
 
 Run a command with decrypted environment variables:
 
+Using a key as a string:
+
 ```bash
-npx envcryptor run -e <file> -s <encryption_key> -- <command>
+envcryptor run -e <file> -s <encryption_key> <command>
+```
+
+Using a key as a `.key` file:
+
+```bash
+envcryptor run -e <file> -f <file> <command>
 ```
 
 Options:
@@ -99,47 +133,34 @@ Options:
 
 ## Example
 
-Encrypt a `.env` file:
+Encrypt an environment variable file:
 
 ```bash
-npx envcryptor keygen -o ./key.key
-npx envcryptor encrypt ./path/to/.env ./path/to/.env.enc -f ./key.key
+envcryptor encrypt .env .env.enc -s my_secret_key
 ```
 
-Decrypt the `.env` file:
+Decrypt an encrypted environment variable file:
 
 ```bash
-npx envcryptor decrypt ./path/to/.env.enc ./path/to/.env -f ./key.key
+envcryptor decrypt .env.enc .env -s my_secret_key
 ```
 
-Edit the encrypted `.env` file:
+Edit an encrypted environment variable file:
 
 ```bash
-npx envcryptor edit ./path/to/.env.enc -f ./key.key
+envcryptor edit .env.enc -s my_secret_key
+```
+
+Generate a new encryption key:
+
+```bash
+envcryptor keygen -o .env.key
 ```
 
 Run a command with decrypted environment variables:
 
 ```bash
-npx envcryptor run -e ./path/to/.env.enc -f ./key.key -- node ./path/to/script.js
-```
-
-## Development
-
-### Build
-
-To build the project, run:
-
-```bash
-npm run build
-```
-
-### Test
-
-To run the tests, use:
-
-```bash
-npm test
+envcryptor run -e .env.enc -f .env.key node index.js
 ```
 
 ## Contributing
@@ -149,8 +170,3 @@ Feel free to submit issues, fork the repository and send pull requests!
 ## License
 
 This project is licensed under the MIT License.
-
-```
-
-This `README.md` provides a comprehensive overview of the EnvCryptor project, including installation, usage, examples, and development instructions. Adjust the content as necessary to fit your project's specifics.
-```
