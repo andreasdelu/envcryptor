@@ -1,0 +1,11 @@
+node_modules
+*.key
+.env.*
+*.env
+.env
+dist
+
+tests/**/*
+!tests/**/*.test.ts
+
+.DS_Store
