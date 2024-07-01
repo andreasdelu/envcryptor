@@ -18,6 +18,12 @@ Simply install the package using `npm`:
 npm install envcryptor
 ```
 
+Psssst! You can also install it globally:
+
+```bash
+npm install -g envcryptor
+```
+
 ## Usage
 
 ### Encrypt
