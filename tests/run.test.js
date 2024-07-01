@@ -6,7 +6,7 @@ describe("Run Command", () => {
 	const envFile = `${folder}/.env`;
 	const encodedFile = `${folder}/.env.enc`;
 	const keyFile = `${folder}/key.key`;
-	let encryptionKey: string;
+	let encryptionKey = null;
 
 	beforeAll(() => {
 		fs.mkdirSync(folder, { recursive: true });

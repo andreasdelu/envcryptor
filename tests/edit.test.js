@@ -9,7 +9,7 @@ describe("Edit Command", () => {
 	return;
 	const encryptedFile = "tests/edit/.env.enc";
 	const keyFile = "tests/edit/key.key";
-	let encryptionKey: string;
+	let encryptionKey = null;
 
 	beforeAll(() => {
 		fs.mkdirSync("tests/edit", { recursive: true });
@@ -41,7 +41,7 @@ describe("Edit Command", () => {
 					const tempFilePath = path.join(os.tmpdir(), "envcryptor.tmp");
 					const tempFileContent = await readFile(tempFilePath, "utf8");
 					expect(tempFileContent).toContain("TEST_VAR=Hello");
-					resolve(true);
+					resolve();
 				} catch (error) {
 					reject(error);
 				}
@@ -64,7 +64,7 @@ describe("Edit Command", () => {
 					const tempFilePath = path.join(os.tmpdir(), "envcryptor.tmp");
 					const tempFileContent = await readFile(tempFilePath, "utf8");
 					expect(tempFileContent).toContain("TEST_VAR=Hello");
-					resolve(true);
+					resolve();
 				} catch (error) {
 					reject(error);
 				}

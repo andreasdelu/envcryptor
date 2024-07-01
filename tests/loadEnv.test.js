@@ -5,7 +5,7 @@ import loadEnv from "../dist/lib/loadEnv.js";
 describe("LoadEnv Function", () => {
 	const encryptedFile = "./tests/loadEnv/.env.enc";
 	const keyFile = "./tests/loadEnv/key.key";
-	let encryptionKey: string;
+	let encryptionKey = null;
 
 	beforeAll(() => {
 		fs.mkdirSync("tests/loadEnv", { recursive: true });

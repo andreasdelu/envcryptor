@@ -6,6 +6,6 @@ node_modules
 dist
 
 tests/**/*
-!tests/**/*.test.ts
+!tests/**/*.test.js
 
 .DS_Store

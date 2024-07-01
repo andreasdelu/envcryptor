@@ -5,7 +5,7 @@ describe("Decrypt Command", () => {
 	const inputFile = "./tests/decrypt/.env.enc";
 	const outputFile = "./tests/decrypt/.env";
 	const keyFile = "./tests/decrypt/key.key";
-	let encryptionKey: string;
+	let encryptionKey = null;
 
 	beforeAll(() => {
 		fs.mkdirSync("tests/decrypt", { recursive: true });

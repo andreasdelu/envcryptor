@@ -5,7 +5,7 @@ import { exec, execSync } from "child_process";
 describe("Encrypt Command", () => {
 	const inputFile = "tests/encrypt/.env";
 	const outputFile = "tests/encrypt/.env.enc";
-	let encryptionKey: string;
+	let encryptionKey = null;
 	const keyFile = "tests/encrypt/key.key";
 
 	beforeAll(() => {
