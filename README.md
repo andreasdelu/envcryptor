@@ -4,12 +4,12 @@ EnvCryptor is a lightweight tool designed to help teams securely share environme
 
 ## Features
 
-🔒 **Encrypt**: Securely encrypt environment variable files.
-🔓 **Decrypt**: Decrypt environment variable files back to plaintext.
-🖋️ **Edit**: Edit encrypted environment variable files securely.
-🔑 **Generate Key**: Generate new encryption keys for secure operations.
-💨 **Run**: Execute commands with environment variables decrypted on-the-fly.
-🪶 **Lightweight**: Minimal dependencies and easy to integrate into any project.
+🔒 **Encrypt**: Securely encrypt environment variable files.<br>
+🔓 **Decrypt**: Decrypt environment variable files back to plaintext.<br>
+🖋️ **Edit**: Edit encrypted environment variable files securely.<br>
+🔑 **Generate Key**: Generate new encryption keys for secure operations.<br>
+💨 **Run**: Execute commands with environment variables decrypted on-the-fly.<br>
+🪶 **Lightweight**: Minimal dependencies and easy to integrate into any project.<br>
 
 ## Installation
 
