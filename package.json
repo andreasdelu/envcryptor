@@ -5,6 +5,7 @@
 	"bin": {
 		"envcryptor": "./dist/bin/cli.js"
 	},
+	"main": "./dist/lib/loadEnv.js",
 	"scripts": {
 		"build": "tsc && chmod +x ./dist/bin/cli.js",
 		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
@@ -12,6 +13,11 @@
 	"author": "andreasdelu",
 	"license": "MIT",
 	"description": "A simple CLI tool to encrypt and decrypt environment variables",
+	"homepage": "https://github.com/andreasdelu/envcryptor#readme",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/andreasdelu/envcryptor.git"
+	},
 	"keywords": [
 		"env",
 		"encrypt",
@@ -22,10 +28,11 @@
 		"dist/",
 		"README.md"
 	],
+	"types": "./dist/lib/loadEnv.d.ts",
 	"exports": {
 		".": {
-			"import": "./lib/loadEnv.js",
-			"require": "./lib/loadEnv.js"
+			"import": "./dist/lib/loadEnv.js",
+			"require": "./dist/lib/loadEnv.js"
 		}
 	},
 	"dependencies": {
