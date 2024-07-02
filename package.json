@@ -1,6 +1,6 @@
 {
 	"name": "envcryptor",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"type": "module",
 	"bin": {
 		"envcryptor": "./dist/bin/cli.js"
