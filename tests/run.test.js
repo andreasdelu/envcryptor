@@ -35,7 +35,7 @@ describe("Run Command", () => {
 
 	it("should set the environment variables and run a command using a string encryption key", (done) => {
 		exec(
-			`node ./dist/bin/cli.js run -e ${encodedFile} -s ${encryptionKey} node ${folder}/script.js`,
+			`node ./dist/bin/cli.js run ${encodedFile} -s ${encryptionKey} -- node ${folder}/script.js`,
 			(error, stdout, stderr) => {
 				expect(error).toBeNull();
 				expect(stderr).toBe("");
@@ -47,7 +47,7 @@ describe("Run Command", () => {
 
 	it("should set the environment variables and run a command using a file encryption key", (done) => {
 		exec(
-			`node ./dist/bin/cli.js run -e ${encodedFile} -f ${keyFile} node ${folder}/script.js`,
+			`node ./dist/bin/cli.js run ${encodedFile} -f ${keyFile} -- node ${folder}/script.js`,
 			(error, stdout, stderr) => {
 				expect(error).toBeNull();
 				expect(stderr).toBe("");

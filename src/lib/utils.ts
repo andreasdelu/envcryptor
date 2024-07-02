@@ -92,3 +92,17 @@ export function packEnv(input: string, output: string, encKey: string) {
 		throw error;
 	}
 }
+
+export function parseEnv(envString: string) {
+	const env: {
+		[key: string]: string;
+	} = {};
+	const lines = envString.split("\n");
+	for (let line of lines) {
+		line = line.trim(); // Trim whitespace
+		if (line === "" || line.startsWith("#")) continue; // Skip empty lines and comments
+		const [key, value] = line.split("=", 2); // Split by the first "=" only
+		env[key] = value;
+	}
+	return env;
+}

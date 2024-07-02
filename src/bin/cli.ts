@@ -2,7 +2,13 @@
 
 import fs from "fs";
 import { Command } from "commander";
-import { decryptEnv, encrypt, exposeEnv, packEnv } from "../lib/utils.js";
+import {
+	decryptEnv,
+	encrypt,
+	exposeEnv,
+	packEnv,
+	parseEnv,
+} from "../lib/utils.js";
 import { execSync } from "child_process";
 import os from "os";
 import crypto from "crypto";
@@ -10,7 +16,7 @@ import crypto from "crypto";
 const program = new Command();
 
 program
-	.name("envcryptor")
+	.name("env-cryptor")
 	.description("A tool to encrypt and decrypt environment variables")
 	.version("1.0.0");
 
@@ -178,55 +184,57 @@ program
 
 program
 	.command("run")
-	.option("-e, --env <file>", "path to the encoded .env file")
+	.argument("<env>", "encrypted .env file")
 	.option("-f, --file <file>", "path to the .key file")
 	.option("-s, --str <string>", "encryption key - as string")
-	.argument("[command...]", "command to run with decrypted env variables")
-	.action(
-		(
-			commands: string[],
-			options: {
-				env?: string;
-				file?: string;
-				str?: string;
-			}
-		) => {
-			const { env, file, str } = options;
-			if (!env || (!file && !str))
-				return console.error(
-					"Please provide an encrypted .env file and an encryption key - either as a string or a .key file"
-				);
-			if (file && str)
-				return console.error(
-					"Please provide only one encryption key - either as a string or a .key file"
-				);
-
-			let encKey;
-			if (str) encKey = str;
-			if (file)
-				if (!fs.existsSync(file))
-					// Check if the file exists
-					return console.error(`The file ${file} does not exist.`);
-				else encKey = fs.readFileSync(file, { encoding: "utf-8" });
-			if (!encKey) return console.error("Error reading the encryption key");
-
-			const envObject: { [key: string]: string } = {};
-			const decryptedEnv = decryptEnv(env, encKey);
-			const parsedEnv = decryptedEnv
-				.split("\n")
-				.filter((line) => !line.trim().startsWith("#"))
-				.map((line) => {
-					const [key, value] = line.split("=");
-					envObject[key] = value;
-					return `${line} `;
-				});
-
-			const commandScript = `${commands.join(" ")}`;
-			execSync(`${parsedEnv} bash -c '${commandScript}'`, {
-				stdio: "inherit",
-				env: { ...process.env, ...envObject },
-			});
+	.allowUnknownOption(true)
+	.allowExcessArguments(true)
+	.action((env: string, options, command) => {
+		const { file, str } = options;
+		if (file && str) {
+			console.error(
+				"Please provide only one encryption key - either as a string or a .key file"
+			);
+			return;
 		}
-	);
+
+		let encKey: string | undefined;
+		if (str) encKey = str;
+		if (file) {
+			if (!fs.existsSync(file)) {
+				console.error(`The file ${file} does not exist.`);
+				return;
+			} else {
+				encKey = fs.readFileSync(file, { encoding: "utf-8" });
+			}
+		}
+		if (!encKey) {
+			console.error("Error reading the encryption key");
+			return;
+		}
+
+		const decryptedEnv = decryptEnv(env, encKey);
+		const parsedEnv = parseEnv(decryptedEnv);
+		const envString = Object.entries(parsedEnv).map(
+			([key, value]) => `${key}=${value}`
+		);
+
+		// Access the raw arguments
+		const rawArgs = command.parent.rawArgs;
+
+		const index = rawArgs.indexOf("--");
+
+		if (index !== -1) {
+			const shellCommand = rawArgs.slice(index + 1).join(" ");
+
+			// Execute the shell command with the environment variables
+			execSync(`sh -c 'export ${envString} && ${shellCommand}'`, {
+				stdio: "inherit",
+				env: { ...process.env, ...parsedEnv },
+			});
+		} else {
+			console.error("No command provided after --");
+		}
+	});
 
 program.parse(process.argv);

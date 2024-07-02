@@ -6,7 +6,7 @@
 		"env-cryptor": "./bin/cli.js"
 	},
 	"scripts": {
-		"build": "tsc && npm run test && chmod +x ./dist/bin/cli.js",
+		"build": "tsc && chmod +x ./dist/bin/cli.js",
 		"test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
 	},
 	"author": "andreasdelu",
