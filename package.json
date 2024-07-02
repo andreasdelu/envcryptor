@@ -1,9 +1,9 @@
 {
-	"name": "env-cryptor",
+	"name": "envcryptor",
 	"version": "1.0.0",
 	"type": "module",
 	"bin": {
-		"env-cryptor": "./bin/cli.js"
+		"envcryptor": "./dist/bin/cli.js"
 	},
 	"scripts": {
 		"build": "tsc && chmod +x ./dist/bin/cli.js",

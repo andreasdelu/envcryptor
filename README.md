@@ -121,18 +121,18 @@ Run a command with decrypted environment variables:
 Using a key as a string:
 
 ```bash
-envcryptor run -e <file> -s <encryption_key> <command>
+envcryptor run <file> -s <encryption_key> -- <command>
 ```
 
 Using a key as a `.key` file:
 
 ```bash
-envcryptor run -e <file> -f <file> <command>
+envcryptor run <file> -f <file> -- <command>
 ```
 
 Options:
 
-- `-e <file>`: Path to the encoded `.env` file.
+- `<file>`: Path to the encoded `.env` file.
 - `-f <file>`: Path to the `.key` file.
 - `-s <encryption_key>`: Encryption key as a string.
 - `<command>`: Command to run with decrypted environment variables.
@@ -166,7 +166,7 @@ envcryptor keygen -o .env.key
 Run a command with decrypted environment variables:
 
 ```bash
-envcryptor run -e .env.enc -f .env.key node index.js
+envcryptor run -e .env.enc -f .env.key -- node index.js
 ```
 
 ## Contributing

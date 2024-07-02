@@ -215,9 +215,9 @@ program
 
 		const decryptedEnv = decryptEnv(env, encKey);
 		const parsedEnv = parseEnv(decryptedEnv);
-		const envString = Object.entries(parsedEnv).map(
-			([key, value]) => `${key}=${value}`
-		);
+		const envString = Object.entries(parsedEnv)
+			.map(([key, value]) => `${key}=${value}`)
+			.join(" ");
 
 		// Access the raw arguments
 		const rawArgs = command.parent.rawArgs;
