@@ -34,13 +34,13 @@ Encrypt an environment variable file using an encryption key:
 Using a key as a string:
 
 ```bash
-envcryptor encrypt <input> <output> -s <encryption_key>
+npx envcryptor encrypt <input> <output> -s <encryption_key>
 ```
 
 Using a key from a `.key` file:
 
 ```bash
-envcryptor encrypt <input> <output> -f <key_file>
+npx envcryptor encrypt <input> <output> -f <key_file>
 ```
 
 **Options:**
@@ -57,13 +57,13 @@ Decrypt an encrypted environment variable file:
 Using a key as a string:
 
 ```bash
-envcryptor decrypt <input> <output> -s <encryption_key>
+npx envcryptor decrypt <input> <output> -s <encryption_key>
 ```
 
 Using a key from a `.key` file:
 
 ```bash
-envcryptor decrypt <input> <output> -f <key_file>
+npx envcryptor decrypt <input> <output> -f <key_file>
 ```
 
 **Options:**
@@ -80,13 +80,13 @@ Edit an encrypted environment variable file:
 Using a key as a string:
 
 ```bash
-envcryptor edit <file> -s <encryption_key>
+npx envcryptor edit <file> -s <encryption_key>
 ```
 
 Using a key from a `.key` file:
 
 ```bash
-envcryptor edit <file> -f <key_file>
+npx envcryptor edit <file> -f <key_file>
 ```
 
 **Options:**
@@ -102,13 +102,13 @@ Generate a new encryption key and either save it to a file or output it to the c
 To save to a `.key` file:
 
 ```bash
-envcryptor keygen -o <output>
+npx envcryptor keygen -o <output>
 ```
 
 To output to the console:
 
 ```bash
-envcryptor keygen
+npx envcryptor keygen
 ```
 
 **Options:**
@@ -122,13 +122,13 @@ Run a command with decrypted environment variables:
 Using a key as a string:
 
 ```bash
-envcryptor run <file> -s <encryption_key> -- <command>
+npx envcryptor run <file> -s <encryption_key> -- <command>
 ```
 
 Using a key from a `.key` file:
 
 ```bash
-envcryptor run <file> -f <key_file> -- <command>
+npx envcryptor run <file> -f <key_file> -- <command>
 ```
 
 **Options:**
@@ -143,31 +143,31 @@ envcryptor run <file> -f <key_file> -- <command>
 ### Encrypt an environment variable file:
 
 ```bash
-envcryptor encrypt .env .env.enc -s my_secret_key
+npx envcryptor encrypt .env .env.enc -s my_secret_key
 ```
 
 ### Decrypt an encrypted environment variable file:
 
 ```bash
-envcryptor decrypt .env.enc .env -s my_secret_key
+npx envcryptor decrypt .env.enc .env -s my_secret_key
 ```
 
 ### Edit an encrypted environment variable file:
 
 ```bash
-envcryptor edit .env.enc -s my_secret_key
+npx envcryptor edit .env.enc -s my_secret_key
 ```
 
 ### Generate a new encryption key:
 
 ```bash
-envcryptor keygen -o .env.key
+npx envcryptor keygen -o .env.key
 ```
 
 ### Run a command with decrypted environment variables:
 
 ```bash
-envcryptor run .env.enc -f .env.key -- node index.js
+npx envcryptor run .env.enc -f .env.key -- node index.js
 ```
 
 ### Load Environment Variables
@@ -175,11 +175,11 @@ envcryptor run .env.enc -f .env.key -- node index.js
 You can also load environment variables from an encrypted file directly into your application using the `loadEnv` function:
 
 ```javascript
-import loadEnv from 'envcryptor/loadEnv';
+import loadEnv from "envcryptor/loadEnv";
 
 loadEnv({
-  path: '.env.enc',
-  key: 'path/to/your/key.key'
+	path: ".env.enc",
+	key: "path/to/your/key.key",
 });
 
 // Your environment variables are now loaded into process.env
